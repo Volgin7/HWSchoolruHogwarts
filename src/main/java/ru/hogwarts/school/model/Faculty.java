@@ -1,24 +1,30 @@
 package ru.hogwarts.school.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
-
+@Entity
 public class Faculty {
-    private Long id;
+
+    @Id
+    @GeneratedValue
+    private long idf;
     private String name;
     private String color;
 
     public Long getId() {
-        return id;
+        return idf;
     }
-
+/*
     public Faculty(Long id, String name, String color) {
         this.id = id;
         this.name = name;
         this.color = color;
     }
-
+*/
     public void setId(Long id) {
-        this.id = id;
+        this.idf = id;
     }
 
     public String getName() {
@@ -52,7 +58,7 @@ public class Faculty {
     @Override
     public String toString() {
         return "Faculty{" +
-                "id=" + id +
+                "id=" + idf +
                 ", name='" + name + '\'' +
                 ", color='" + color + '\'' +
                 '}';

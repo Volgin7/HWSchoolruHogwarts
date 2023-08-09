@@ -6,14 +6,13 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
 
-import java.util.ArrayList;
+
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 @RestController
-@RequestMapping("faculties")
+@RequestMapping("/faculty")
 public class FacultyController {
     private final FacultyService facultyService;
     public FacultyController(FacultyService facultyService) {
@@ -45,15 +44,19 @@ public class FacultyController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Faculty> deleteFaculty(@PathVariable Long id) {
-        Faculty faculty = facultyService.deleteFaculty(id);
-        if(faculty == null) {
-            return ResponseEntity.notFound() .build();
-        }
-        return ResponseEntity.ok(faculty);
+        facultyService.deleteFaculty(id);
+        return ResponseEntity.ok().build();
+    }
+    @GetMapping
+    public Collection<Faculty> getAllFacultie() {
+        return facultyService.getAllFaculties();
     }
 
+        /*
     @GetMapping("{color}")
     public Collection<Faculty> getFacultiesWithColor(@PathVariable String color) {
         return facultyService.colorFacultyFilter(color);
     }
+
+         */
 }

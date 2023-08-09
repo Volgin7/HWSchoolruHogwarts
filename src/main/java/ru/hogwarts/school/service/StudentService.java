@@ -46,7 +46,6 @@ public class StudentService {
     }
 */
     public Collection<Student> getAllStudents() {
-        System.out.println("getAllServ");
         return studentRepository.findAll();
     }
 }

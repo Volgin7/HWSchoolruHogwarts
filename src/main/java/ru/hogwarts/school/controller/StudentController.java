@@ -25,7 +25,6 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
-        System.out.println("createStudent");
         System.out.println(student.toString());
         Student createdStudent = studentService.createStudent(student);
         return ResponseEntity.ok(createdStudent);
@@ -33,7 +32,6 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable("id") long id) {
-        System.out.println("getStudent");
         Student student = studentService.findStudent(id);
         if(student == null) {
             return ResponseEntity.notFound().build();
@@ -67,7 +65,6 @@ public class StudentController {
 
     @GetMapping
     public Collection<Student> getAllStudents() {
-        System.out.println("getAllContr");
         return studentService.getAllStudents();
     }
 }

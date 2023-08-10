@@ -9,22 +9,16 @@ public class Faculty {
 
     @Id
     @GeneratedValue
-    private long idf;
+    private long id;
     private String name;
     private String color;
 
     public Long getId() {
-        return idf;
+        return id;
     }
-/*
-    public Faculty(Long id, String name, String color) {
-        this.id = id;
-        this.name = name;
-        this.color = color;
-    }
-*/
+
     public void setId(Long id) {
-        this.idf = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -58,7 +52,7 @@ public class Faculty {
     @Override
     public String toString() {
         return "Faculty{" +
-                "id=" + idf +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", color='" + color + '\'' +
                 '}';

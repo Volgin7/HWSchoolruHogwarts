@@ -35,17 +35,12 @@ public class StudentService {
     public void deleteStudent(long id) {
         studentRepository.deleteById(id);
     }
-/*
-    public Collection<Student> ageStudentFilter(int age) {
 
-        List<Student> studentsList = new ArrayList<>(students.values());
-        List<Student> studentsAtAge = studentsList.stream()
-                .filter(e -> e.getAge() == age)
-                .collect(Collectors.toList());
-        return studentsAtAge;
-    }
-*/
     public Collection<Student> getAllStudents() {
         return studentRepository.findAll();
+    }
+
+    public Collection<Student> findByAge(int min, int max) {
+        return studentRepository.findByAgeBetween(min, max);
     }
 }

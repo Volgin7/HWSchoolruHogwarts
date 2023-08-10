@@ -39,16 +39,12 @@ public class FacultyService {
     public Collection<Faculty> getAllFaculties() {
         return facultyRepository.findAll();
     }
-/*
-    public Collection<Faculty> colorFacultyFilter(String color) {
 
-        List<Faculty> facultiessList = new ArrayList<>(faculties.values());
-        List<Faculty> facultiesWithColor = facultiessList.stream()
-                .filter(e -> e.getColor().equals(color))
-                .collect(Collectors.toList());
-        return facultiesWithColor;
+    public Collection<Faculty> findByName(String name) {
+        return facultyRepository.findAllByNameIgnoreCase(name);
     }
-
- */
+    public Collection<Faculty> findByColor(String color) {
+        return facultyRepository.findAllByColorIgnoreCase(color);
+    }
 
 }

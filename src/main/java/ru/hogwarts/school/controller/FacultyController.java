@@ -8,7 +8,7 @@ import ru.hogwarts.school.service.FacultyService;
 
 
 import java.util.Collection;
-
+import java.util.List;
 
 
 @RestController
@@ -27,6 +27,20 @@ public class FacultyController {
         }
         return ResponseEntity.ok(faculty);
     }
+
+    @GetMapping()
+    public ResponseEntity findFaculties(@RequestParam(required = false) String name,
+                                                              @RequestParam(required = false) String color) {
+
+        if(name != null && !name.isBlank()) {
+            return ResponseEntity.ok(facultyService.findByName(name));
+        }
+        if(color != null && !color.isBlank()) {
+            return ResponseEntity.ok(facultyService.findByColor(color));
+        }
+        return ResponseEntity.ok(facultyService.getAllFaculties());
+    }
+
     @PostMapping
     public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty faculty) {
         Faculty createdFaculty = facultyService.createFaculty(faculty);
@@ -47,16 +61,5 @@ public class FacultyController {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
     }
-    @GetMapping
-    public Collection<Faculty> getAllFacultie() {
-        return facultyService.getAllFaculties();
-    }
 
-        /*
-    @GetMapping("{color}")
-    public Collection<Faculty> getFacultiesWithColor(@PathVariable String color) {
-        return facultyService.colorFacultyFilter(color);
-    }
-
-         */
 }

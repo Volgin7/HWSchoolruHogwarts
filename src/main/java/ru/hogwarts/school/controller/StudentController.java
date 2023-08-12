@@ -1,17 +1,11 @@
 package ru.hogwarts.school.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
+import javax.websocket.server.PathParam;
 import java.util.Collection;
 
 @RequestMapping("/student")
@@ -25,7 +19,6 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
-        System.out.println("createStudent");
         System.out.println(student.toString());
         Student createdStudent = studentService.createStudent(student);
         return ResponseEntity.ok(createdStudent);
@@ -33,13 +26,20 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable("id") long id) {
-        System.out.println("getStudent");
         Student student = studentService.findStudent(id);
         if(student == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(student);
+    }
 
+    @GetMapping("/{min}/{max}")
+    public ResponseEntity<Collection<Student>> findByAge(@PathVariable("min") int min, @PathVariable("max") int max) {
+        Collection<Student> student = studentService.findByAge(min, max);
+        if(student == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(student);
     }
 
     @PutMapping
@@ -56,18 +56,13 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-    /*
-
-    @GetMapping("/{age}")
-    public Collection<Student> getStudentsAtAge(@PathVariable("age") int age) {
-
-        return studentService.ageStudentFilter(age);
-    }
-     */
-
     @GetMapping
     public Collection<Student> getAllStudents() {
-        System.out.println("getAllContr");
         return studentService.getAllStudents();
+    }
+
+    @DeleteMapping("/by-faculty")
+    public Collection<Student> getAllByFaculty(@RequestParam Long id) {
+        return studentService.getAllStudentsByFacultyId(id);
     }
 }

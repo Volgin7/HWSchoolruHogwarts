@@ -7,11 +7,11 @@ select * from student
 where name like '%o%';
 
 select * from student
-where age - 20 < id;  // -20 to find smth
+where age - 20 < id;
 
 select * from student
 ORDER by age;
 
-select * from student as s, faculty as f
+select s.name as student,f.name as faculty from student as s, faculty as f
 where s.faculty_id = f.id
-ORDER by age;
+ORDER by s.name;

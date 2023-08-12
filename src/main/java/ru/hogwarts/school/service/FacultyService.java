@@ -47,4 +47,8 @@ public class FacultyService {
         return facultyRepository.findAllByColorIgnoreCase(color);
     }
 
+    public Faculty getByStudentId(long id) {
+        return facultyRepository.findByStudent_Id(id);
+    }
+
 }

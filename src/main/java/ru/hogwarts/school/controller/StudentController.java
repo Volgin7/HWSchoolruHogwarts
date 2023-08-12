@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
+import javax.websocket.server.PathParam;
 import java.util.Collection;
 
 @RequestMapping("/student")
@@ -55,10 +56,13 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-
-
     @GetMapping
     public Collection<Student> getAllStudents() {
         return studentService.getAllStudents();
+    }
+
+    @DeleteMapping("/by-faculty")
+    public Collection<Student> getAllByFaculty(@RequestParam Long id) {
+        return studentService.getAllStudentsByFacultyId(id);
     }
 }

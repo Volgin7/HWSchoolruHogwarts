@@ -7,10 +7,6 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
 
 
-import java.util.Collection;
-import java.util.List;
-
-
 @RestController
 @RequestMapping("/faculty")
 public class FacultyController {
@@ -61,5 +57,11 @@ public class FacultyController {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/by-student")
+    public Faculty getByStudentId(@RequestParam Long id) {
+        return facultyService.getByStudentId(id);
+    }
+
 
 }

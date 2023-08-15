@@ -7,14 +7,14 @@ import java.util.Objects;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private int age;
 
     public Student() {
     }
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne // (fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
@@ -24,10 +24,6 @@ public class Student {
 
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Long getId() {

@@ -10,7 +10,7 @@ public class Faculty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private String color;
 
@@ -20,6 +20,16 @@ public class Faculty {
 
     public Faculty() {
     }
+
+    public Collection<Student> getStudent() {
+        return student;
+    }
+
+    public void setStudent(Collection<Student> student) {
+        this.student = student;
+    }
+
+
     public Long getId() {
         return id;
     }

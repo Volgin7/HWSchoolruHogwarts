@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FacultyService {
+
     @Autowired
     private FacultyRepository facultyRepository;
 
@@ -25,7 +26,7 @@ public class FacultyService {
         return facultyRepository.save(faculty);
     }
 
-    public Faculty findFaculty(long id) {
+    public Faculty findFaculty(Long id) {
         return facultyRepository.findById(id).get();
     }
 
@@ -33,7 +34,7 @@ public class FacultyService {
         return facultyRepository.save(faculty);
     }
 
-    public void deleteFaculty(long id) {
+    public void deleteFaculty(Long id) {
         facultyRepository.deleteById(id);
     }
     public Collection<Faculty> getAllFaculties() {
@@ -47,7 +48,7 @@ public class FacultyService {
         return facultyRepository.findAllByColorIgnoreCase(color);
     }
 
-    public Faculty getByStudentId(long id) {
+    public Faculty getByStudentId(Long id) {
         return facultyRepository.findByStudent_Id(id);
     }
 

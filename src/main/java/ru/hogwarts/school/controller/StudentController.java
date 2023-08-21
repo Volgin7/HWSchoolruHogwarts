@@ -20,7 +20,7 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
-        System.out.println(student.toString());
+        // System.out.println(student.toString());
         Student createdStudent = studentService.createStudent(student);
         return ResponseEntity.ok(createdStudent);
     }
@@ -46,23 +46,7 @@ public class StudentController {
     public Collection<Student> getAllByFaculty(@RequestParam Long id) {
         return studentService.getAllStudentsByFacultyId(id);
     }
-
-/*
-    @GetMapping
-    public Collection<Student> getAllStudents() {
-        return studentService.getAllStudents();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentInfo(@PathVariable("id") Long id) {
-        Student student = studentService.findStudent(id);
-        if(student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(student);
-    }
-
- */
+    
     @GetMapping()
     public ResponseEntity findStudents(@RequestParam(required = false) Long id,
                                         @RequestParam(required = false) Long min, @RequestParam(required = false) Long max) {
@@ -75,16 +59,6 @@ public class StudentController {
         }
         return ResponseEntity.ok(studentService.getAllStudents());
     }
-/*
-    @GetMapping("/{min}/{max}")
-    public ResponseEntity<Collection<Student>> findByAge(@PathVariable("min") int min, @PathVariable("max") int max) {
-        Collection<Student> student = studentService.findByAge(min, max);
-        if(student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(student);
-    }
 
- */
 }
 

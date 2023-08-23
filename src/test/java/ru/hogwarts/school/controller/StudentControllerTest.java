@@ -63,7 +63,7 @@ public class StudentControllerTest {
         Student student = new Student();
         student.setName("Nastya");
         student.setAge(22);
-        
+
         String studentString = this.restTemplate.postForObject("http://localhost:" + port + "/student",student, String.class);
         JSONObject studentObject = new JSONObject(studentString);
 

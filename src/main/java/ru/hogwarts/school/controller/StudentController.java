@@ -35,8 +35,8 @@ public class StudentController {
         return ResponseEntity.ok(editedStudent);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Student> deleteStudent(@PathVariable("id") Long id) {
+    @DeleteMapping()
+    public ResponseEntity<Student> deleteStudent(@RequestParam  Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.ok().build();
     }
@@ -46,11 +46,10 @@ public class StudentController {
     public Collection<Student> getAllByFaculty(@RequestParam Long id) {
         return studentService.getAllStudentsByFacultyId(id);
     }
-    
+
     @GetMapping()
-    public ResponseEntity findStudents(@RequestParam(required = false) Long id,
+    public ResponseEntity getStudents(@RequestParam(required = false) Long id,
                                         @RequestParam(required = false) Long min, @RequestParam(required = false) Long max) {
-        // System.out.println("In GET Students");
         if(id != null) {
             return ResponseEntity.ok(studentService.findStudent(id));
         }

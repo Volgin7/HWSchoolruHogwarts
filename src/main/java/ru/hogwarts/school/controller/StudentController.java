@@ -47,26 +47,9 @@ public class StudentController {
         return studentService.getAllStudentsByFacultyId(id);
     }
 
-/*
-    @GetMapping
-    public Collection<Student> getAllStudents() {
-        return studentService.getAllStudents();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentInfo(@PathVariable("id") Long id) {
-        Student student = studentService.findStudent(id);
-        if(student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(student);
-    }
-
- */
     @GetMapping()
-    public ResponseEntity findStudents(@RequestParam(required = false) Long id,
+    public ResponseEntity getStudents(@RequestParam(required = false) Long id,
                                         @RequestParam(required = false) Long min, @RequestParam(required = false) Long max) {
-        // System.out.println("In GET Students");
         if(id != null) {
             return ResponseEntity.ok(studentService.findStudent(id));
         }
@@ -75,16 +58,6 @@ public class StudentController {
         }
         return ResponseEntity.ok(studentService.getAllStudents());
     }
-/*
-    @GetMapping("/{min}/{max}")
-    public ResponseEntity<Collection<Student>> findByAge(@PathVariable("min") int min, @PathVariable("max") int max) {
-        Collection<Student> student = studentService.findByAge(min, max);
-        if(student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(student);
-    }
 
- */
 }
 

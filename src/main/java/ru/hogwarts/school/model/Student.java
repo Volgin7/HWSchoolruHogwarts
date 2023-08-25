@@ -14,7 +14,7 @@ public class Student {
     public Student() {
     }
 
-    @ManyToOne // (fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 

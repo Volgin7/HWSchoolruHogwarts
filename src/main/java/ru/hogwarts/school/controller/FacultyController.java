@@ -25,7 +25,7 @@ public class FacultyController {
     }
 
     @GetMapping()
-    public ResponseEntity findFaculties(@RequestParam(required = false) String name,
+    public ResponseEntity getFaculties(@RequestParam(required = false) String name,
                                                               @RequestParam(required = false) String color) {
 
         if(name != null && !name.isBlank()) {
@@ -52,8 +52,8 @@ public class FacultyController {
         return ResponseEntity.ok(editedFaculty);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Faculty> deleteFaculty(@PathVariable Long id) {
+    @DeleteMapping()
+    public ResponseEntity<Faculty> deleteFaculty(@RequestParam Long id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
     }

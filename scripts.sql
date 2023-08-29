@@ -15,3 +15,10 @@ ORDER by age;
 select s.name as student,f.name as faculty from student as s, faculty as f
 where s.faculty_id = f.id
 ORDER by s.name;
+
+
+select * from student
+ORDER by id desc
+limit 5;
+
+select * from avatar

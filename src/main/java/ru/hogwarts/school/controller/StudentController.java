@@ -35,8 +35,8 @@ public class StudentController {
         return ResponseEntity.ok(editedStudent);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Student> deleteStudent(@PathVariable("id") Long id) {
+    @DeleteMapping()
+    public ResponseEntity<Student> deleteStudent(@RequestParam Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.ok().build();
     }
@@ -47,22 +47,6 @@ public class StudentController {
         return studentService.getAllStudentsByFacultyId(id);
     }
 
-/*
-    @GetMapping
-    public Collection<Student> getAllStudents() {
-        return studentService.getAllStudents();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentInfo(@PathVariable("id") Long id) {
-        Student student = studentService.findStudent(id);
-        if(student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(student);
-    }
-
- */
     @GetMapping()
     public ResponseEntity findStudents(@RequestParam(required = false) Long id,
                                         @RequestParam(required = false) Long min, @RequestParam(required = false) Long max) {
@@ -75,16 +59,30 @@ public class StudentController {
         }
         return ResponseEntity.ok(studentService.getAllStudents());
     }
-/*
-    @GetMapping("/{min}/{max}")
-    public ResponseEntity<Collection<Student>> findByAge(@PathVariable("min") int min, @PathVariable("max") int max) {
-        Collection<Student> student = studentService.findByAge(min, max);
-        if(student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(student);
+
+    @GetMapping("/count")
+    public int countAllStudents() {
+        return studentService.countAllStudents();
     }
 
- */
+    @GetMapping("/min-age")
+    public int minAgeOfStudents() {
+        return studentService.minAgeOfStudents();
+    }
+
+    @GetMapping("/max-age")
+    public int maxAgeOfStudents() {
+        return studentService.maxAgeOfStudents();
+    }
+
+    @GetMapping("/avg-age")
+    public int avgAgeOfStudents() {
+        return studentService.avgAgeOfStudents();
+    }
+
+    @GetMapping("/last-five")
+    public ResponseEntity findLastFiveStudents() {
+        return ResponseEntity.ok(studentService.findLastFiveStudents());
+    }
 }
 

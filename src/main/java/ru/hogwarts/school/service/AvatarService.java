@@ -2,6 +2,7 @@ package ru.hogwarts.school.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.model.Avatar;
@@ -15,7 +16,9 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.beans.Transient;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
@@ -72,6 +75,7 @@ public class AvatarService {
         return avatarRepository.findByStudentId(id).orElse(new Avatar());
     }
 
+
     private byte[] generateImagePreview(Path filePath) throws IOException {
         try ( InputStream is = Files.newInputStream(filePath);
               BufferedInputStream bis = new BufferedInputStream(is, 1024);
@@ -91,7 +95,11 @@ public class AvatarService {
 
 
     }
-private String getExtension(String fileName) { return fileName.substring(fileName.lastIndexOf(".") + 1);}
+    private String getExtension(String fileName) { return fileName.substring(fileName.lastIndexOf(".") + 1);}
 
+    public Collection<Avatar> findAllAvatars(Integer pageNumber, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1,pageSize);
+        return avatarRepository.findAll(pageRequest).getContent();
+    }
 
 }

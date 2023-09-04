@@ -59,7 +59,7 @@ public class Student {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getAge());
+        return Objects.hash(getId());
     }
 
     @Override

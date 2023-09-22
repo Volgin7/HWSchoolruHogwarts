@@ -64,4 +64,9 @@ public class FacultyController {
     }
 
 
+    @GetMapping("/parStreams/longest-name")
+    public String getLongestName() {
+        return facultyService.getLongestName();
+    }
+
 }

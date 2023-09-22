@@ -9,10 +9,7 @@ import ru.hogwarts.school.repositories.FacultyRepository;
 import ru.hogwarts.school.repositories.StudentRepository;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,6 +57,14 @@ public class FacultyService {
     public Faculty getByStudentId(Long id) {
         logger.info("Was invoked method for find faculty by student id");
         return facultyRepository.findByStudent_Id(id);
+    }
+
+    public String getLongestName() {
+        logger.info("Was invoked method for find faculty with longest name");
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .orElse("-1");
     }
 
 }

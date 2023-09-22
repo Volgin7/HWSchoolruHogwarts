@@ -8,6 +8,7 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.lang.constant.ConstantDescs.NULL;
 
@@ -83,6 +84,23 @@ public class StudentService {
     public Collection<Student> findLastFiveStudents() {
         logger.info("Was invoked method for find last five students");
         return studentRepository.findLastFiveStudents();
+    }
+
+    public List<String> getStudentsA() {
+        logger.info("Was invoked method for find students starts A");
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .filter(st->st.startsWith("A"))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public double getAverageAge() {
+        logger.info("Was invoked method for average age");
+        return studentRepository.findAll().stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(-1);
     }
 
 }

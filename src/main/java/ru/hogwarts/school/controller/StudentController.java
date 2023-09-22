@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 import java.util.Collection;
+import java.util.List;
 
 @RequestMapping("/student")
 @RestController
@@ -83,6 +84,16 @@ public class StudentController {
     @GetMapping("/last-five")
     public ResponseEntity findLastFiveStudents() {
         return ResponseEntity.ok(studentService.findLastFiveStudents());
+    }
+
+    @GetMapping("/parStreams/astudents")
+    public List<String> getStudentsA() {
+        return studentService.getStudentsA();
+    }
+
+    @GetMapping("/parStreams/avg-age")
+    public double getAverageAge() {
+        return studentService.getAverageAge();
     }
 }
 

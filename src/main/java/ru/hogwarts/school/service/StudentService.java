@@ -12,9 +12,10 @@ import java.util.stream.Collectors;
 
 import static java.lang.constant.ConstantDescs.NULL;
 
+
 @Service
 public class StudentService {
-
+    public Integer count = 0;
     private static final Logger logger = LoggerFactory.getLogger(StudentService.class);
 
     @Autowired
@@ -149,6 +150,7 @@ public class StudentService {
 
     private synchronized void printStudent(Student student) {
         System.out.println(student);
+        count++;
     }
 
 }

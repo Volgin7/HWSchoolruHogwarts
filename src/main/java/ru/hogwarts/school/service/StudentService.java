@@ -103,4 +103,52 @@ public class StudentService {
                 .orElse(-1);
     }
 
+    public void printStudents() {
+        logger.info("Was invoked method for print students");
+        List<Student> allStudents = studentRepository.findAll();
+
+        System.out.println(allStudents.get(0));
+        System.out.println(allStudents.get(1));
+
+        Thread threadOne = new Thread (() -> {
+            System.out.println(allStudents.get(2));
+            System.out.println(allStudents.get(3));
+        });
+
+        Thread threadTwo = new Thread (() -> {
+            System.out.println(allStudents.get(4));
+            System.out.println(allStudents.get(5));
+        });
+
+        threadOne.start();
+        threadTwo.start();
+
+    }
+
+    public void printStudentsSync() {
+        logger.info("Was invoked method for print students sync");
+        List<Student> allStudents = studentRepository.findAll();
+
+        printStudent(allStudents.get(0));
+        printStudent(allStudents.get(1));
+
+        Thread threadOne = new Thread (() -> {
+            printStudent(allStudents.get(2));
+            printStudent(allStudents.get(3));
+        });
+
+        Thread threadTwo = new Thread (() -> {
+            printStudent(allStudents.get(4));
+            printStudent(allStudents.get(5));
+        });
+
+        threadOne.start();
+        threadTwo.start();
+
+    }
+
+    private synchronized void printStudent(Student student) {
+        System.out.println(student);
+    }
+
 }

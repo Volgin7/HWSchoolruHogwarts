@@ -150,7 +150,7 @@ public class StudentService {
 
     private synchronized void printStudent(Student student) {
         System.out.println(student);
-        count++;
+        count++; // added
     }
 
 }

@@ -130,27 +130,27 @@ public class StudentService {
         logger.info("Was invoked method for print students sync");
         List<Student> allStudents = studentRepository.findAll();
 
-        printStudent(allStudents.get(0));
-        printStudent(allStudents.get(1));
+        printStudent(allStudents);
+        printStudent(allStudents);
 
         Thread threadOne = new Thread (() -> {
-            printStudent(allStudents.get(2));
-            printStudent(allStudents.get(3));
+            printStudent(allStudents);
+            printStudent(allStudents);
         });
+        threadOne.start();
 
         Thread threadTwo = new Thread (() -> {
-            printStudent(allStudents.get(4));
-            printStudent(allStudents.get(5));
+            printStudent(allStudents);
+            printStudent(allStudents);
         });
 
-        threadOne.start();
         threadTwo.start();
 
     }
 
-    private synchronized void printStudent(Student student) {
-        System.out.println(student);
-        count++; // added
+    private synchronized void printStudent(List<Student>   allStudents) {
+            System.out.println(allStudents.get(count++ % allStudents.size()));
+
     }
 
 }
